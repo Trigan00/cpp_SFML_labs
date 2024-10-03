@@ -14,7 +14,6 @@ sf::Vector2f getRandomPos(){
 int main() {
     sf::RenderWindow window(sf::VideoMode(800, 600), "SFML Project");
     window.setFramerateLimit(60);
-
     Menu menu;
 
     Circle* circle = new Circle(50.0f, sf::Vector2f(300.0f, 300.0f));
