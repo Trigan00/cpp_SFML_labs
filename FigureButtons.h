@@ -43,6 +43,9 @@ public:
             }
             window.draw(button.button);
         }
+
+        drawFigures(window);
+
         window.draw(figureShadow);
     }
 
@@ -55,6 +58,20 @@ private:
         sf::Vector2i mousePos = sf::Mouse::getPosition(window);
         sf::FloatRect buttonBounds = button.getGlobalBounds();
         return buttonBounds.contains(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
+    }
+
+    void drawFigures(sf::RenderWindow& window){
+        sf::CircleShape circleF(20);
+        circleF.setFillColor(sf::Color::Blue);
+        circleF.setPosition(145,165);
+
+        sf::RectangleShape RectangleF(sf::Vector2f(40, 40));
+        RectangleF.setFillColor(sf::Color::Blue);
+        RectangleF.setPosition(145,235);
+
+
+        window.draw(circleF);
+        window.draw(RectangleF);
     }
 
 
