@@ -1,3 +1,6 @@
+#ifndef MENU_H
+#define MENU_H
+
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "FigureButtons.h"
@@ -55,3 +58,5 @@ private:
         return buttonBounds.contains(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
     }
 };
+
+#endif

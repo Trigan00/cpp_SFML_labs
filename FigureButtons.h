@@ -1,3 +1,6 @@
+#ifndef FIGUREBUTTONS_H
+#define FIGUREBUTTONS_H
+
 #include <SFML/Graphics.hpp>
 
 enum Shape{CircleFigure, RectangleFigure};
@@ -76,3 +79,5 @@ private:
 
 
 };
+
+#endif

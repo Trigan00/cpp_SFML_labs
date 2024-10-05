@@ -2,8 +2,8 @@
 #include <iostream>
 
 #include "Menu.h"
-#include "Circle.h"
-#include "Rectangle.h"
+#include "figures/Circle.h"
+#include "figures/Rectangle.h"
 
 sf::Vector2f getRandomPos(){
     const float x = 10 + ( std::rand() % ( 700 - 10 + 1 ) ); 
@@ -63,8 +63,8 @@ int main() {
         }
 
         window.clear(sf::Color::Black);
-        if (circle != nullptr) window.draw(*circle);
-        if (rectangle != nullptr) window.draw(*rectangle);
+        if (circle != nullptr) circle->draw(window);
+        if (rectangle != nullptr) rectangle->draw(window);
         menu.draw(window);
         window.display();
     }
