@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Figure.h"
+#include "FigureShape.h"
 
 class Circle : public Figure {
 public:
@@ -24,6 +25,8 @@ public:
         circle.setPosition(position);
     }
 
+    Shape getShape() const override { return Shape::CircleFigure;}
+
     void changeRadius(float radius) {
         circle.setRadius(radius);
     }
@@ -32,8 +35,8 @@ public:
         return circle.getRadius();
     }
 
-    void draw(sf::RenderWindow& window) const {
-        window.draw(circle);
+    void draw(sf::RenderWindow& window) {
+        if (getIsActive()) window.draw(circle);
     }
 
 

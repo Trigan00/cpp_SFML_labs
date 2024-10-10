@@ -4,10 +4,12 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "FigureButtons.h"
+#include "MenuButton.h"
+#include "figures/FigureShape.h"
 
 class Menu {
 public:
-    Menu() {
+    Menu(MenuButton** butsArray, unsigned int len) : buttonsArray(butsArray), buttonsArrayLen(len) {
         openMenuButton.setSize(sf::Vector2f(50, 50));
         openMenuButton.setPosition(700, 20);
         openMenuButton.setFillColor(sf::Color::Blue);
@@ -30,7 +32,12 @@ public:
 
             if (isMenuOpen) {
                 figureButtons.handleEvent(window);
-                std::cout << figureButtons.activeFigure << std::endl;
+
+                for (int i = 0; i < buttonsArrayLen; i++)
+                {
+                    MenuButton* but = buttonsArray[i];
+                    if (isMouseOver(but->background, window) && but->getShape() == figureButtons.activeFigure) but->onClick();
+                }
             }
         }
     }
@@ -42,6 +49,19 @@ public:
             window.draw(menuBackground);
             window.draw(figuresMenuBackground);
             figureButtons.draw(window);
+
+            int j = 0;
+
+            for (int i = 0; i < buttonsArrayLen; i++)
+            {
+                MenuButton* but = buttonsArray[i];
+                if (but->getShape() == figureButtons.activeFigure){
+                    but->background.setPosition(210, 160 + j * 70);
+                    window.draw(but->background);
+                    j++;
+                }
+            }
+            
         }
     }
 
@@ -50,6 +70,8 @@ private:
     sf::RectangleShape menuBackground;
     sf::RectangleShape figuresMenuBackground;
     FigureButtons figureButtons;
+    MenuButton** buttonsArray;
+    unsigned int buttonsArrayLen;
     bool isMenuOpen = false;
 
     bool isMouseOver(const sf::RectangleShape& button, sf::RenderWindow& window) {

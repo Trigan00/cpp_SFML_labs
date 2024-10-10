@@ -2,8 +2,7 @@
 #define FIGUREBUTTONS_H
 
 #include <SFML/Graphics.hpp>
-
-enum Shape{CircleFigure, RectangleFigure};
+#include "figures/FigureShape.h"
 
 struct FigureButton
 {

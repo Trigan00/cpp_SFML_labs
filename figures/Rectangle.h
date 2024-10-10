@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Figure.h"
+#include "FigureShape.h"
 
 class Rectangle : public Figure {
 public:
@@ -23,8 +24,11 @@ public:
         rectangle.setPosition(position);
     }
 
+    Shape getShape() const override { return Shape::RectangleFigure;}
+
+
     void draw(sf::RenderWindow& window) const {
-        window.draw(rectangle);
+        if (getIsActive()) window.draw(rectangle);
     }
 
 private:
