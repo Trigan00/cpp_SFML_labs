@@ -14,7 +14,7 @@ class MenuButton
 public:
     sf::RectangleShape background;
 
-    MenuButton(const std::string& name, Figure* fig, ActionType actionType) : title(name), figure(fig), action(actionType) {
+    MenuButton(const std::string& name, Figure* fig, ActionType actionType, Shape figureShape) : title(name), figure(fig), action(actionType), shape(figureShape) {
         background.setSize(sf::Vector2f(250, 50));
         background.setFillColor(sf::Color::Magenta);
 
@@ -83,6 +83,7 @@ private:
     sf::Font font;
     Figure* figure;
     ActionType action;
+    Shape shape;
 };
 
 

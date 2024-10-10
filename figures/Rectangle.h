@@ -25,7 +25,8 @@ public:
     }
     
     void setPos(const sf::Vector2f& pos) override {
-        rectangle.setPosition(pos);
+        position = pos;
+        rectangle.setPosition(position);
     }
 
     Shape getShape() const override { return Shape::RectangleFigure;}

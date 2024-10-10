@@ -15,14 +15,14 @@ int main() {
     Circle* circle = new Circle(50.0f, sf::Vector2f(300.0f, 300.0f));
     Rectangle* rectangle = new Rectangle(sf::Vector2f(120.0f, 50.0f), sf::Vector2f(500.0f, 300.0f));
 
-    MenuButton circleBut1("Show/Hide", circle, ActionType::CHANGE_VISIBILITY);
-    MenuButton rectangleBut1("Show/Hide", rectangle, ActionType::CHANGE_VISIBILITY);
-    MenuButton circleBut2("Increase size", circle, ActionType::INCREASE_SIZE);
-    MenuButton rectangleBut2("Increase size", rectangle, ActionType::INCREASE_SIZE);
-    MenuButton circleBut3("Decrease size", circle, ActionType::DECREASE_SIZE);
-    MenuButton rectangleBut3("Decrease size", rectangle, ActionType::DECREASE_SIZE);
-    MenuButton circleBut4("Set random position", circle, ActionType::RANDOM_POS);
-    MenuButton rectangleBut4("Set random position", rectangle, ActionType::RANDOM_POS);
+    MenuButton circleBut1("Show/Hide", circle, ActionType::CHANGE_VISIBILITY, Shape::CircleFigure);
+    MenuButton rectangleBut1("Show/Hide", rectangle, ActionType::CHANGE_VISIBILITY, Shape::RectangleFigure);
+    MenuButton circleBut2("Increase size", circle, ActionType::INCREASE_SIZE, Shape::CircleFigure);
+    MenuButton rectangleBut2("Increase size", rectangle, ActionType::INCREASE_SIZE, Shape::RectangleFigure);
+    MenuButton circleBut3("Decrease size", circle, ActionType::DECREASE_SIZE, Shape::CircleFigure);
+    MenuButton rectangleBut3("Decrease size", rectangle, ActionType::DECREASE_SIZE, Shape::RectangleFigure);
+    MenuButton circleBut4("Set random position", circle, ActionType::RANDOM_POS, Shape::CircleFigure);
+    MenuButton rectangleBut4("Set random position", rectangle, ActionType::RANDOM_POS, Shape::RectangleFigure);
     MenuButton* butArr[8] {&circleBut1, &rectangleBut1, &circleBut2, &rectangleBut2, &circleBut3, &rectangleBut3, &circleBut4, &rectangleBut4};
 
     Menu menu(butArr, 8);
@@ -35,16 +35,14 @@ int main() {
             menu.handleEvent(window, event);
         }
 
-        if (circle != nullptr){
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) circle->move(sf::Vector2f(-1.0f, 0.0f));
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) circle->move(sf::Vector2f(1.0f, 0.0f));
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) circle->move(sf::Vector2f(0.0f, -1.0f));
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) circle->move(sf::Vector2f(0.0f, 1.0f));
-        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) circle->move(sf::Vector2f(-1.0f, 0.0f));
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) circle->move(sf::Vector2f(1.0f, 0.0f));
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) circle->move(sf::Vector2f(0.0f, -1.0f));
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) circle->move(sf::Vector2f(0.0f, 1.0f));
 
         window.clear(sf::Color::Black);
-        if (circle != nullptr) circle->draw(window);
-        if (rectangle != nullptr) rectangle->draw(window);
+        circle->draw(window);
+        rectangle->draw(window);
         menu.draw(window);
         window.display();
     }

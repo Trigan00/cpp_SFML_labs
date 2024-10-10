@@ -25,7 +25,8 @@ public:
     }
     
     void setPos(const sf::Vector2f& pos) override {
-        circle.setPosition(pos);
+        position = pos;
+        circle.setPosition(position);
     }
 
     Shape getShape() const override { return Shape::CircleFigure;}
