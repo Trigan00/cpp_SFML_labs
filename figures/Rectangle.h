@@ -19,9 +19,13 @@ public:
         rectangle.setPosition(position);
     }
     
-    void setRandomPosition() override {
-        position += getRandomPos();
-        rectangle.setPosition(position);
+    void setSize(float offset) override {
+        sf::Vector2f s = rectangle.getSize();
+        rectangle.setSize(sf::Vector2f(s.x + offset, s.y + offset));
+    }
+    
+    void setPos(const sf::Vector2f& pos) override {
+        rectangle.setPosition(pos);
     }
 
     Shape getShape() const override { return Shape::RectangleFigure;}

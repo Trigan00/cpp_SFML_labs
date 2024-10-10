@@ -57,7 +57,8 @@ public:
                 MenuButton* but = buttonsArray[i];
                 if (but->getShape() == figureButtons.activeFigure){
                     but->background.setPosition(210, 160 + j * 70);
-                    window.draw(but->background);
+                    but->setTextPos(210, 160 + j * 70);
+                    but->draw(window);
                     j++;
                 }
             }

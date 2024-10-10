@@ -8,16 +8,16 @@ class Figure {
 public:
 
     virtual void move(const sf::Vector2f& offset) = 0;
-    virtual void setRandomPosition() = 0;
+    virtual void setSize(float offset) = 0;
+    virtual void setPos(const sf::Vector2f& pos) = 0;
     virtual Shape getShape() const = 0;
 
     bool getIsActive() const {return isActive;}
     void setIsActive(bool isAct) {isActive = isAct;}
 
-protected:
-    sf::Vector2f getRandomPos(int from = -50, int to = 50){
-        const float offsetX = from + ( std::rand() % ( to - from + 1 ) ); 
-        const float offsetY = from + ( std::rand() % ( to - from + 1 ) ); 
+    sf::Vector2f getRandomPos(int XMax = 700, int YMax = 500){
+        const float offsetX = 0 + ( std::rand() % ( XMax - 0 + 1 ) ); 
+        const float offsetY = 0 + ( std::rand() % ( YMax - 0 + 1 ) ); 
         return sf::Vector2f(offsetX, offsetY);
     }
 

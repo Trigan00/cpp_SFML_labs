@@ -20,20 +20,15 @@ public:
         circle.setPosition(position);
     }
     
-    void setRandomPosition() override {
-        position += getRandomPos();
-        circle.setPosition(position);
+    void setSize(float offset) override {
+        circle.setRadius(circle.getRadius() + offset);
+    }
+    
+    void setPos(const sf::Vector2f& pos) override {
+        circle.setPosition(pos);
     }
 
     Shape getShape() const override { return Shape::CircleFigure;}
-
-    void changeRadius(float radius) {
-        circle.setRadius(radius);
-    }
-
-    float getRadius() const {
-        return circle.getRadius();
-    }
 
     void draw(sf::RenderWindow& window) {
         if (getIsActive()) window.draw(circle);
