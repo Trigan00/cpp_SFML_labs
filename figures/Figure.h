@@ -11,6 +11,7 @@ public:
     virtual void setSize(float offset) = 0;
     virtual void setPos(const sf::Vector2f& pos) = 0;
     virtual Shape getShape() const = 0;
+    virtual void draw(sf::RenderWindow& window) const = 0;
 
     bool getIsActive() const {return isActive;}
     void setIsActive(bool isAct) {isActive = isAct;}

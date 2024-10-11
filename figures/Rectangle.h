@@ -32,7 +32,7 @@ public:
     Shape getShape() const override { return Shape::RectangleFigure;}
 
 
-    void draw(sf::RenderWindow& window) const {
+    void draw(sf::RenderWindow& window) const override {
         if (getIsActive()) window.draw(rectangle);
     }
 

@@ -31,7 +31,7 @@ public:
 
     Shape getShape() const override { return Shape::CircleFigure;}
 
-    void draw(sf::RenderWindow& window) {
+    void draw(sf::RenderWindow& window) const override {
         if (getIsActive()) window.draw(circle);
     }
 

@@ -14,7 +14,7 @@ class MenuButton
 public:
     sf::RectangleShape background;
 
-    MenuButton(const std::string& name, Figure* fig, ActionType actionType, Shape figureShape) : title(name), figure(fig), action(actionType), shape(figureShape) {
+    MenuButton(const std::string& name, std::vector<Figure*> figVector, ActionType actionType, Shape figureShape) : title(name), figuresVector(figVector), action(actionType), shape(figureShape) {
         background.setSize(sf::Vector2f(250, 50));
         background.setFillColor(sf::Color::Magenta);
 
@@ -30,7 +30,7 @@ public:
     };
 
     Shape getShape() const {
-        return figure->getShape();
+        return shape;
     }
 
     void setTextPos(int x, int y){
@@ -46,15 +46,36 @@ public:
     }
 
     void changeVisibility() {
-        figure->setIsActive(!figure->getIsActive());
+        for (size_t i = 0; i < figuresVector.size(); i++)
+        {
+            if (figuresVector[i]->getShape() == shape)
+            {
+                figuresVector[i]->setIsActive(!figuresVector[i]->getIsActive());
+
+            }
+        }
     }
 
     void changeSize(float offset) {
-        figure->setSize(offset);
+        for (size_t i = 0; i < figuresVector.size(); i++)
+        {
+            if (figuresVector[i]->getShape() == shape)
+            {
+                figuresVector[i]->setSize(offset);
+
+            }
+        }
     }
 
     void setRandomPos() {
-        figure->setPos(figure->getRandomPos());
+        for (size_t i = 0; i < figuresVector.size(); i++)
+        {
+            if (figuresVector[i]->getShape() == shape)
+            {
+                figuresVector[i]->setPos(figuresVector[i]->getRandomPos());
+
+            }
+        }
     }
 
     void onClick(){
@@ -81,7 +102,7 @@ private:
     std::string title;
     sf::Text buttonText;
     sf::Font font;
-    Figure* figure;
+    std::vector<Figure*> figuresVector;
     ActionType action;
     Shape shape;
 };
