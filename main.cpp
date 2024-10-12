@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 
+#include "WindowConsts.h"
 #include "Menu.h"
 #include "figures/Figure.h"
 #include "figures/Circle.h"
@@ -12,7 +13,7 @@
 
 
 int main() {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "SFML Project");
+    sf::RenderWindow window(sf::VideoMode(windowX, windowY), "SFML Project");
     window.setFramerateLimit(60);
 
     Circle* circle = new Circle(50.0f, sf::Vector2f(300.0f, 300.0f));
@@ -41,10 +42,10 @@ int main() {
             menu.handleEvent(window, event);
         }
 
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) circle->move(sf::Vector2f(-1.0f, 0.0f));
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) circle->move(sf::Vector2f(1.0f, 0.0f));
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) circle->move(sf::Vector2f(0.0f, -1.0f));
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) circle->move(sf::Vector2f(0.0f, 1.0f));
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) circle->move(sf::Vector2f(-3.0f, 0.0f));
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) circle->move(sf::Vector2f(3.0f, 0.0f));
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) circle->move(sf::Vector2f(0.0f, -3.0f));
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) circle->move(sf::Vector2f(0.0f, 3.0f));
 
         window.clear(sf::Color::Black);
         for (size_t i = 0; i < figuresVector.size(); i++) figuresVector[i]->draw(window);
@@ -52,13 +53,9 @@ int main() {
         window.display();
     }
 
-    if (circle != nullptr) {
-        delete circle;
-        circle = nullptr;
-    }
-    if (rectangle != nullptr) {
-        delete rectangle;
-        rectangle = nullptr;
+    for (size_t i = 0; i < figuresVector.size(); i++) {
+        delete figuresVector[i];
+        figuresVector[i] = nullptr;
     }
 
     return 0;
