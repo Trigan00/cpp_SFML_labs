@@ -8,10 +8,10 @@
 
 class Rectangle : public Figure {
 public:
-    Rectangle(const sf::Vector2f& size, const sf::Vector2f& localPosition)
+    Rectangle(const sf::Vector2f& size, const sf::Vector2f& localPosition, sf::Color color)
         : position(localPosition) {
         rectangle.setSize(size);
-        rectangle.setFillColor(sf::Color::Red);
+        rectangle.setFillColor(color);
         rectangle.setPosition(position);
     }
 
@@ -36,12 +36,14 @@ public:
 
     Shape getShape() const override { return Shape::RectangleFigure;}
 
+    void action() override {};
+
 
     void draw(sf::RenderWindow& window) const override {
         if (getIsActive()) window.draw(rectangle);
     }
 
-private:
+protected:
     sf::RectangleShape rectangle;
     sf::Vector2f position;
     

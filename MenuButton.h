@@ -7,7 +7,7 @@
 #include "figures/Figure.h"
 #include "figures/FigureShape.h"
 
-enum ActionType {CHANGE_VISIBILITY, INCREASE_SIZE, DECREASE_SIZE, RANDOM_POS};
+enum ActionType {CHANGE_VISIBILITY, INCREASE_SIZE, DECREASE_SIZE, RANDOM_POS, ACTION};
 
 class MenuButton
 {
@@ -78,6 +78,17 @@ public:
         }
     }
 
+    void doAction() {
+        for (size_t i = 0; i < figuresVector.size(); i++)
+        {
+            if (figuresVector[i]->getShape() == shape)
+            {
+                figuresVector[i]->action();
+
+            }
+        }
+    }
+
     void onClick(){
         switch (action)
         {
@@ -92,6 +103,9 @@ public:
             break;
         case RANDOM_POS:
             setRandomPos();
+            break;
+        case ACTION:
+            doAction();
             break;
         default:
             break;

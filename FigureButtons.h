@@ -10,7 +10,7 @@ struct FigureButton
     sf::RectangleShape button;
 
     FigureButton(Shape s) : shape(s), button(sf::Vector2f(50, 50)) {
-        button.setFillColor(sf::Color::White);  // Инициализация кнопки
+        button.setFillColor(sf::Color::White);
     }
 };
 
@@ -26,6 +26,7 @@ public:
         
         figureButtonsVector.push_back(FigureButton(Shape::CircleFigure));
         figureButtonsVector.push_back(FigureButton(Shape::RectangleFigure));
+        figureButtonsVector.push_back(FigureButton(Shape::LineFigure));
         for (int i = 0; i < figureButtonsVector.size(); ++i) {
             figureButtonsVector[i].button.setPosition(140, 160 + i * 70);
         }
@@ -70,10 +71,15 @@ private:
         sf::RectangleShape RectangleF(sf::Vector2f(40, 40));
         RectangleF.setFillColor(sf::Color::Blue);
         RectangleF.setPosition(145,235);
+        
+        sf::RectangleShape LineF(sf::Vector2f(40, 5));
+        LineF.setFillColor(sf::Color::Blue);
+        LineF.setPosition(145,305);
 
 
         window.draw(circleF);
         window.draw(RectangleF);
+        window.draw(LineF);
     }
 
 

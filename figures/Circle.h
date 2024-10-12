@@ -8,11 +8,11 @@
 
 class Circle : public Figure {
 public:
-    Circle(float radius, const sf::Vector2f& localPosition)
+    Circle(float radius, const sf::Vector2f& localPosition, sf::Color color)
         : position(localPosition) {
         circle.setRadius(radius);
         // setOrigin(radius, radius); // Центрируем круг
-        circle.setFillColor(sf::Color::Cyan);
+        circle.setFillColor(color);
         circle.setPosition(position);
     }
 
@@ -54,6 +54,8 @@ public:
     }
 
     Shape getShape() const override { return Shape::CircleFigure;}
+
+    void action() override {};
 
     void draw(sf::RenderWindow& window) const override {
         if (getIsActive()) window.draw(circle);

@@ -8,6 +8,7 @@
 #include "figures/Figure.h"
 #include "figures/Circle.h"
 #include "figures/Rectangle.h"
+#include "figures/Line.h"
 #include "figures/FigureShape.h"
 #include "MenuButton.h"
 
@@ -16,13 +17,15 @@ int main() {
     sf::RenderWindow window(sf::VideoMode(windowX, windowY), "SFML Project");
     window.setFramerateLimit(60);
 
-    Circle* circle = new Circle(50.0f, sf::Vector2f(300.0f, 300.0f));
-    Rectangle* rectangle = new Rectangle(sf::Vector2f(120.0f, 50.0f), sf::Vector2f(500.0f, 300.0f));
+    Circle* circle = new Circle(50.0f, sf::Vector2f(300.0f, 300.0f),sf::Color::Cyan);
+    Rectangle* rectangle = new Rectangle(sf::Vector2f(120.0f, 50.0f), sf::Vector2f(500.0f, 300.0f), sf::Color::Magenta);
+    Rectangle* line = new Line(sf::Vector2f(150.0f, 5.0f), sf::Vector2f(100.0f, 30.0f), sf::Color::Yellow);
 
-    std::vector<Figure*> figuresVector {circle, rectangle};
+    std::vector<Figure*> figuresVector {circle, rectangle, line};
 
     MenuButton circleBut1("Show/Hide", figuresVector, ActionType::CHANGE_VISIBILITY, Shape::CircleFigure);
     MenuButton rectangleBut1("Show/Hide", figuresVector, ActionType::CHANGE_VISIBILITY, Shape::RectangleFigure);
+    MenuButton lineBut1("Change color", figuresVector, ActionType::ACTION, Shape::LineFigure);
     MenuButton circleBut2("Increase size", figuresVector, ActionType::INCREASE_SIZE, Shape::CircleFigure);
     MenuButton rectangleBut2("Increase size", figuresVector, ActionType::INCREASE_SIZE, Shape::RectangleFigure);
     MenuButton circleBut3("Decrease size", figuresVector, ActionType::DECREASE_SIZE, Shape::CircleFigure);
@@ -30,9 +33,9 @@ int main() {
     MenuButton circleBut4("Set random position", figuresVector, ActionType::RANDOM_POS, Shape::CircleFigure);
     MenuButton rectangleBut4("Set random position", figuresVector, ActionType::RANDOM_POS, Shape::RectangleFigure);
 
-    MenuButton* butArr[8] {&circleBut1, &rectangleBut1, &circleBut2, &rectangleBut2, &circleBut3, &rectangleBut3, &circleBut4, &rectangleBut4};
+    MenuButton* butArr[9] {&circleBut1, &rectangleBut1, &lineBut1, &circleBut2, &rectangleBut2, &circleBut3, &rectangleBut3, &circleBut4, &rectangleBut4};
 
-    Menu menu(butArr, 8);
+    Menu menu(butArr, 9);
 
 
     while (window.isOpen()) {

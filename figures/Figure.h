@@ -12,6 +12,7 @@ public:
     virtual void setPos(const sf::Vector2f& pos) = 0;
     virtual Shape getShape() const = 0;
     virtual void draw(sf::RenderWindow& window) const = 0;
+    virtual void action() = 0;
 
     bool getIsActive() const {return isActive;}
     void setIsActive(bool isAct) {isActive = isAct;}
