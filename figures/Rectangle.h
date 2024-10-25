@@ -3,26 +3,27 @@
 
 #include <SFML/Graphics.hpp>
 #include "../WindowConsts.h"
+#include "Point.h"
 #include "Figure.h"
 #include "FigureShape.h"
 
 class Rectangle : public Figure {
 public:
     Rectangle(const sf::Vector2f& size, const sf::Vector2f& localPosition, sf::Color color)
-        : position(localPosition) {
+        : point(localPosition) {
         rectangle.setSize(size);
         rectangle.setFillColor(color);
-        rectangle.setPosition(position);
+        rectangle.setPosition(point.getPos());
     }
 
     void move(const sf::Vector2f& offset) override {
-        position += offset;
-        rectangle.setPosition(position);
+        point.setPos(point.getPos() + offset);
+        rectangle.setPosition(point.getPos());
     }
     
     void setSize(float offset) override {
         sf::Vector2f s = rectangle.getSize();
-        const sf::Vector2f newSize(position.x + s.x + offset, position.y + s.y + offset);
+        const sf::Vector2f newSize(point.getPos().x + s.x + offset, point.getPos().y + s.y + offset);
         if (s.x + offset < 0 || s.y + offset < 0) return;
         if (newSize.x >= windowX) return;
         if (newSize.y >= windowY) return;
@@ -30,8 +31,8 @@ public:
     }
     
     void setPos(const sf::Vector2f& pos) override {
-        position = pos;
-        rectangle.setPosition(position);
+        point.setPos(pos);
+        rectangle.setPosition(point.getPos());
     }
 
     Shape getShape() const override { return Shape::RectangleFigure;}
@@ -45,7 +46,7 @@ public:
 
 protected:
     sf::RectangleShape rectangle;
-    sf::Vector2f position;
+    Point point;
     
 };
 

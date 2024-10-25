@@ -4,16 +4,17 @@
 #include <SFML/Graphics.hpp>
 #include "../WindowConsts.h"
 #include "Figure.h"
+#include "Point.h"
 #include "FigureShape.h"
 
 class Circle : public Figure {
 public:
     Circle(float radius, const sf::Vector2f& localPosition, sf::Color color)
-        : position(localPosition) {
+        : point(localPosition) {
         circle.setRadius(radius);
         // setOrigin(radius, radius); // Центрируем круг
         circle.setFillColor(color);
-        circle.setPosition(position);
+        circle.setPosition(point.getPos());
     }
 
     bool posCheck(sf::Vector2f newPos) {
@@ -25,14 +26,14 @@ public:
     }
 
     void move(const sf::Vector2f& offset) override {
-        const sf::Vector2f newPos = position + offset;
+        const sf::Vector2f newPos = point.getPos() + offset;
         if (!posCheck(newPos)) return;
-        position += offset;
-        circle.setPosition(position);
+        point.setPos(newPos);
+        circle.setPosition(point.getPos());
     }
     
     void setSize(float offset) override {
-        const sf::Vector2f newPos = sf::Vector2f(position.x + offset, position.y + offset);
+        const sf::Vector2f newPos = sf::Vector2f(point.getPos().x + offset, point.getPos().y + offset);
         const float newRadius = circle.getRadius() + offset;
         if (newRadius <= 0) return;
         if (!posCheck(newPos)) return;
@@ -49,8 +50,8 @@ public:
     }
     
     void setPos(const sf::Vector2f& pos) override {
-        position = pos;
-        circle.setPosition(position);
+        point.setPos(pos);
+        circle.setPosition(point.getPos());
     }
 
     Shape getShape() const override { return Shape::CircleFigure;}
@@ -64,7 +65,7 @@ public:
 
 private:
     sf::CircleShape circle;
-    sf::Vector2f position;
+    Point point;
     
 };
 
