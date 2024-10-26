@@ -18,7 +18,7 @@ public:
         menuBackground.setPosition(200, 150);
         menuBackground.setFillColor(sf::Color(0, 0, 100, 200));
   
-        figuresMenuBackground.setSize(sf::Vector2f(70, 210));
+        figuresMenuBackground.setSize(sf::Vector2f(70, 280));
         figuresMenuBackground.setPosition(130, 150);
         figuresMenuBackground.setFillColor(sf::Color(0, 100, 0, 200));
 

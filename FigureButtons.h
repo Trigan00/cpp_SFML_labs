@@ -27,6 +27,7 @@ public:
         figureButtonsVector.push_back(FigureButton(Shape::CircleFigure));
         figureButtonsVector.push_back(FigureButton(Shape::RectangleFigure));
         figureButtonsVector.push_back(FigureButton(Shape::LineFigure));
+        figureButtonsVector.push_back(FigureButton(Shape::EllipseFigure));
         for (int i = 0; i < figureButtonsVector.size(); ++i) {
             figureButtonsVector[i].button.setPosition(140, 160 + i * 70);
         }
@@ -75,11 +76,18 @@ private:
         sf::RectangleShape LineF(sf::Vector2f(40, 5));
         LineF.setFillColor(sf::Color::Blue);
         LineF.setPosition(145,305);
+        
+        sf::CircleShape ellipseF(1.0f);
+        ellipseF.setPointCount(50);
+        ellipseF.setScale(20, 10);
+        ellipseF.setFillColor(sf::Color::Blue);
+        ellipseF.setPosition(145,375);
 
 
         window.draw(circleF);
         window.draw(RectangleF);
         window.draw(LineF);
+        window.draw(ellipseF);
     }
 
 

@@ -11,6 +11,7 @@
 #include "figures/Rectangle.h"
 #include "figures/Line.h"
 #include "figures/SquareCircle.h"
+#include "figures/Ellipse.h"
 #include "figures/FigureShape.h"
 #include "MenuButton.h"
 
@@ -22,10 +23,11 @@ int main() {
     Circle* circle = new Circle(50.0f, sf::Vector2f(300.0f, 200.0f),sf::Color::Cyan);
     Rectangle* rectangle = new Rectangle(sf::Vector2f(120.0f, 50.0f), sf::Vector2f(500.0f, 200.0f), sf::Color::Magenta);
     Rectangle* line = new Line(sf::Vector2f(150.0f, 5.0f), sf::Vector2f(100.0f, 30.0f), sf::Color::Yellow);
-    Circle* ring = new Ring(50.0f, sf::Vector2f(200.0f, 400.0f),sf::Color::Red);
-    Rectangle* squareCircle = new SquareCircle(sf::Vector2f(100.0f, 100.0f), sf::Vector2f(400.0f, 400.0f), sf::Color::Red);
+    Circle* ring = new Ring(50.0f, sf::Vector2f(100.0f, 400.0f),sf::Color::Red);
+    Rectangle* squareCircle = new SquareCircle(sf::Vector2f(100.0f, 100.0f), sf::Vector2f(300.0f, 400.0f), sf::Color::Red);
+    Ellipse* ellipse = new Ellipse(50.0f, sf::Vector2f(500.0f, 400.0f),sf::Color::Red);
 
-    std::vector<Figure*> figuresVector {circle, rectangle, line, ring, squareCircle};
+    std::vector<Figure*> figuresVector {circle, rectangle, line, ring, squareCircle, ellipse};
 
     MenuButton circleBut0("Create", figuresVector, ActionType::CREATE_CIRCLE, Shape::CircleFigure);
     MenuButton circleBut1("Show/Hide", figuresVector, ActionType::CHANGE_VISIBILITY, Shape::CircleFigure);
@@ -37,10 +39,11 @@ int main() {
     MenuButton rectangleBut3("Decrease size", figuresVector, ActionType::DECREASE_SIZE, Shape::RectangleFigure);
     MenuButton circleBut4("Set random position", figuresVector, ActionType::RANDOM_POS, Shape::CircleFigure);
     MenuButton rectangleBut4("Set random position", figuresVector, ActionType::RANDOM_POS, Shape::RectangleFigure);
+    MenuButton ellipseBut1("Rotate", figuresVector, ActionType::ACTION, Shape::EllipseFigure);
 
-    MenuButton* butArr[10] {&circleBut0, &circleBut1, &rectangleBut1, &lineBut1, &circleBut2, &rectangleBut2, &circleBut3, &rectangleBut3, &circleBut4, &rectangleBut4};
+    MenuButton* butArr[11] {&circleBut0, &circleBut1, &rectangleBut1, &lineBut1, &circleBut2, &rectangleBut2, &circleBut3, &rectangleBut3, &circleBut4, &rectangleBut4, &ellipseBut1};
 
-    Menu menu(butArr, 10);
+    Menu menu(butArr, 11);
 
 
     while (window.isOpen()) {
@@ -50,10 +53,10 @@ int main() {
             menu.handleEvent(window, event);
         }
 
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) circle->move(sf::Vector2f(-3.0f, 0.0f));
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) circle->move(sf::Vector2f(3.0f, 0.0f));
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) circle->move(sf::Vector2f(0.0f, -3.0f));
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) circle->move(sf::Vector2f(0.0f, 3.0f));
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) ellipse->move(sf::Vector2f(-3.0f, 0.0f));
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) ellipse->move(sf::Vector2f(3.0f, 0.0f));
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) ellipse->move(sf::Vector2f(0.0f, -3.0f));
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) ellipse->move(sf::Vector2f(0.0f, 3.0f));
 
         window.clear(sf::Color::Black);
         for (size_t i = 0; i < figuresVector.size(); i++) figuresVector[i]->draw(window);
