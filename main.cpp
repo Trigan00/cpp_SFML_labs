@@ -12,6 +12,8 @@
 #include "figures/Line.h"
 #include "figures/SquareCircle.h"
 #include "figures/Ellipse.h"
+#include "figures/Rhombus.h"
+#include "figures/Trapezoid.h"
 #include "figures/FigureShape.h"
 #include "MenuButton.h"
 
@@ -21,13 +23,16 @@ int main() {
     window.setFramerateLimit(60);
 
     Circle* circle = new Circle(50.0f, sf::Vector2f(300.0f, 200.0f),sf::Color::Cyan);
-    Rectangle* rectangle = new Rectangle(sf::Vector2f(120.0f, 50.0f), sf::Vector2f(500.0f, 200.0f), sf::Color::Magenta);
+    Rectangle* rectangle = new Rectangle(sf::Vector2f(120.0f, 50.0f), sf::Vector2f(400.0f, 50.0f), sf::Color::Magenta);
     Rectangle* line = new Line(sf::Vector2f(150.0f, 5.0f), sf::Vector2f(100.0f, 30.0f), sf::Color::Yellow);
     Circle* ring = new Ring(50.0f, sf::Vector2f(100.0f, 400.0f),sf::Color::Red);
     Rectangle* squareCircle = new SquareCircle(sf::Vector2f(100.0f, 100.0f), sf::Vector2f(300.0f, 400.0f), sf::Color::Red);
-    Ellipse* ellipse = new Ellipse(50.0f, sf::Vector2f(500.0f, 400.0f),sf::Color::Red);
+    Ellipse* ellipse = new Ellipse(50.0f, sf::Vector2f(500.0f, 450.0f),sf::Color::Red);
+    Rhombus* rhombus = new Rhombus(200, 100, sf::Vector2f(150, 250), sf::Color::Red);
+    Trapezoid* trapezoid = new Trapezoid(sf::Vector2f(500, 200), sf::Vector2f(700, 200), 
+                        sf::Vector2f(650, 400), sf::Vector2f(550, 400), sf::Color::Red);
 
-    std::vector<Figure*> figuresVector {circle, rectangle, line, ring, squareCircle, ellipse};
+    std::vector<Figure*> figuresVector {circle, rectangle, line, ring, squareCircle, rhombus, trapezoid, ellipse};
 
     MenuButton circleBut0("Create", figuresVector, ActionType::CREATE_CIRCLE, Shape::CircleFigure);
     MenuButton circleBut1("Show/Hide", figuresVector, ActionType::CHANGE_VISIBILITY, Shape::CircleFigure);
