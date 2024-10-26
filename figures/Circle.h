@@ -10,24 +10,26 @@
 class Circle : public Figure {
 public:
     Circle(float radius, const sf::Vector2f& localPosition, sf::Color color)
-        : point(localPosition) {
+        : Figure(localPosition) {
+        while(!posCheck(localPosition, radius)){
+            radius -= 1;
+        }
         circle.setRadius(radius);
-        // setOrigin(radius, radius); // Центрируем круг
         circle.setFillColor(color);
         circle.setPosition(point.getPos());
     }
 
-    bool posCheck(sf::Vector2f newPos) {
+    bool posCheck(sf::Vector2f newPos, float r) {
         if (newPos.x <= 0) return false;
-        if (newPos.x + 2 * circle.getRadius() >= windowX) return false;
+        if (newPos.x + 2 * r >= windowX) return false;
         if (newPos.y <= 0) return false;
-        if (newPos.y + 2 * circle.getRadius() >= windowY) return false;
+        if (newPos.y + 2 * r >= windowY) return false;
         return true;
     }
 
     void move(const sf::Vector2f& offset) override {
         const sf::Vector2f newPos = point.getPos() + offset;
-        if (!posCheck(newPos)) return;
+        if (!posCheck(newPos, circle.getRadius())) return;
         point.setPos(newPos);
         circle.setPosition(point.getPos());
     }
@@ -36,16 +38,7 @@ public:
         const sf::Vector2f newPos = sf::Vector2f(point.getPos().x + offset, point.getPos().y + offset);
         const float newRadius = circle.getRadius() + offset;
         if (newRadius <= 0) return;
-        if (!posCheck(newPos)) return;
-
-        // if (newRadius <= 0) return;
-        // if (position.x - (newRadius - circle.getRadius()) >= 0 && 
-        //     position.x + 2 * newRadius <= windowX && 
-        //     position.y - (newRadius - circle.getRadius()) >= 0 && 
-        //     position.y + 2 * newRadius <= windowY){
-
-        //     circle.setRadius(circle.getRadius() + offset);
-        // }
+        if (!posCheck(newPos, circle.getRadius())) return;
         circle.setRadius(circle.getRadius() + offset);
     }
     
@@ -63,10 +56,8 @@ public:
     }
 
 
-private:
+protected:
     sf::CircleShape circle;
-    Point point;
-    
 };
 
 #endif // CIRCLE_H

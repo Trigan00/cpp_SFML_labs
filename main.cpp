@@ -7,8 +7,10 @@
 #include "Menu.h"
 #include "figures/Figure.h"
 #include "figures/Circle.h"
+#include "figures/Ring.h"
 #include "figures/Rectangle.h"
 #include "figures/Line.h"
+#include "figures/SquareCircle.h"
 #include "figures/FigureShape.h"
 #include "MenuButton.h"
 
@@ -17,11 +19,13 @@ int main() {
     sf::RenderWindow window(sf::VideoMode(windowX, windowY), "SFML Project");
     window.setFramerateLimit(60);
 
-    Circle* circle = new Circle(50.0f, sf::Vector2f(300.0f, 300.0f),sf::Color::Cyan);
-    Rectangle* rectangle = new Rectangle(sf::Vector2f(120.0f, 50.0f), sf::Vector2f(500.0f, 300.0f), sf::Color::Magenta);
+    Circle* circle = new Circle(50.0f, sf::Vector2f(300.0f, 200.0f),sf::Color::Cyan);
+    Rectangle* rectangle = new Rectangle(sf::Vector2f(120.0f, 50.0f), sf::Vector2f(500.0f, 200.0f), sf::Color::Magenta);
     Rectangle* line = new Line(sf::Vector2f(150.0f, 5.0f), sf::Vector2f(100.0f, 30.0f), sf::Color::Yellow);
+    Circle* ring = new Ring(50.0f, sf::Vector2f(200.0f, 400.0f),sf::Color::Red);
+    Rectangle* squareCircle = new SquareCircle(sf::Vector2f(100.0f, 100.0f), sf::Vector2f(400.0f, 400.0f), sf::Color::Red);
 
-    std::vector<Figure*> figuresVector {circle, rectangle, line};
+    std::vector<Figure*> figuresVector {circle, rectangle, line, ring, squareCircle};
 
     MenuButton circleBut1("Show/Hide", figuresVector, ActionType::CHANGE_VISIBILITY, Shape::CircleFigure);
     MenuButton rectangleBut1("Show/Hide", figuresVector, ActionType::CHANGE_VISIBILITY, Shape::RectangleFigure);

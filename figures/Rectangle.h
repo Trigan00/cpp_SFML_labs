@@ -10,7 +10,7 @@
 class Rectangle : public Figure {
 public:
     Rectangle(const sf::Vector2f& size, const sf::Vector2f& localPosition, sf::Color color)
-        : point(localPosition) {
+        : Figure(localPosition) {
         rectangle.setSize(size);
         rectangle.setFillColor(color);
         rectangle.setPosition(point.getPos());
@@ -46,8 +46,6 @@ public:
 
 protected:
     sf::RectangleShape rectangle;
-    Point point;
-    
 };
 
 #endif // RECTANGLE_H

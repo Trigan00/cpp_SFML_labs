@@ -2,10 +2,12 @@
 #define FIGURE_H
 
 #include "FigureShape.h"
-
+#include "Point.h"
 
 class Figure {
 public:
+
+    Figure(const sf::Vector2f& localPosition): point(localPosition){}
 
     virtual void move(const sf::Vector2f& offset) = 0;
     virtual void setSize(float offset) = 0;
@@ -24,8 +26,10 @@ public:
     }
 
 private:
-    bool isActive {true};  
+    bool isActive {true};
 
+protected:
+    Point point;
 };
 
 #endif // FIGURE_H
