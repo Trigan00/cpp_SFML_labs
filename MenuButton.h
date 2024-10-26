@@ -4,17 +4,18 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 #include <iostream>
+#include "figures/Circle.h"
 #include "figures/Figure.h"
 #include "figures/FigureShape.h"
 
-enum ActionType {CHANGE_VISIBILITY, INCREASE_SIZE, DECREASE_SIZE, RANDOM_POS, ACTION};
+enum ActionType { CREATE_CIRCLE, CHANGE_VISIBILITY, INCREASE_SIZE, DECREASE_SIZE, RANDOM_POS, ACTION};
 
 class MenuButton
 {
 public:
     sf::RectangleShape background;
 
-    MenuButton(const std::string& name, std::vector<Figure*> figVector, ActionType actionType, Shape figureShape) : title(name), figuresVector(figVector), action(actionType), shape(figureShape) {
+    MenuButton(const std::string& name, std::vector<Figure*>& figVector, ActionType actionType, Shape figureShape) : title(name), figuresVector(figVector), action(actionType), shape(figureShape) {
         background.setSize(sf::Vector2f(250, 50));
         background.setFillColor(sf::Color::Magenta);
 
@@ -43,6 +44,12 @@ public:
     void draw(sf::RenderWindow& window) {
         window.draw(background);
         window.draw(buttonText);
+    }
+
+    void createCircle(){
+        Circle* circle = new Circle(50.0f, sf::Vector2f(400.0f, 200.0f),sf::Color::Green);
+        circle->setPos(circle->getRandomPos());
+        figuresVector.push_back(circle);
     }
 
     void changeVisibility() {
@@ -92,6 +99,9 @@ public:
     void onClick(){
         switch (action)
         {
+        case CREATE_CIRCLE:
+            createCircle();
+            break;
         case CHANGE_VISIBILITY:
             changeVisibility();
             break;
@@ -116,7 +126,7 @@ private:
     std::string title;
     sf::Text buttonText;
     sf::Font font;
-    std::vector<Figure*> figuresVector;
+    std::vector<Figure*>& figuresVector;
     ActionType action;
     Shape shape;
 };

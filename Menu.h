@@ -14,7 +14,7 @@ public:
         openMenuButton.setPosition(700, 20);
         openMenuButton.setFillColor(sf::Color::Blue);
 
-        menuBackground.setSize(sf::Vector2f(400, 300));
+        menuBackground.setSize(sf::Vector2f(400, 400));
         menuBackground.setPosition(200, 150);
         menuBackground.setFillColor(sf::Color(0, 0, 100, 200));
   

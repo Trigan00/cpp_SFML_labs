@@ -27,6 +27,7 @@ int main() {
 
     std::vector<Figure*> figuresVector {circle, rectangle, line, ring, squareCircle};
 
+    MenuButton circleBut0("Create", figuresVector, ActionType::CREATE_CIRCLE, Shape::CircleFigure);
     MenuButton circleBut1("Show/Hide", figuresVector, ActionType::CHANGE_VISIBILITY, Shape::CircleFigure);
     MenuButton rectangleBut1("Show/Hide", figuresVector, ActionType::CHANGE_VISIBILITY, Shape::RectangleFigure);
     MenuButton lineBut1("Change color", figuresVector, ActionType::ACTION, Shape::LineFigure);
@@ -37,9 +38,9 @@ int main() {
     MenuButton circleBut4("Set random position", figuresVector, ActionType::RANDOM_POS, Shape::CircleFigure);
     MenuButton rectangleBut4("Set random position", figuresVector, ActionType::RANDOM_POS, Shape::RectangleFigure);
 
-    MenuButton* butArr[9] {&circleBut1, &rectangleBut1, &lineBut1, &circleBut2, &rectangleBut2, &circleBut3, &rectangleBut3, &circleBut4, &rectangleBut4};
+    MenuButton* butArr[10] {&circleBut0, &circleBut1, &rectangleBut1, &lineBut1, &circleBut2, &rectangleBut2, &circleBut3, &rectangleBut3, &circleBut4, &rectangleBut4};
 
-    Menu menu(butArr, 9);
+    Menu menu(butArr, 10);
 
 
     while (window.isOpen()) {
