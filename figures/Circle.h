@@ -28,15 +28,10 @@ public:
     }
 
     void setSize(float offset) override {
-        // const sf::Vector2f newPos = sf::Vector2f(point.getPos().x + offset, point.getPos().y + offset);
-        // const float newRadius = circle.getRadius() + offset;
-        // if (newRadius <= 0) return;
-        // if (!posCheck(newPos, circle.getRadius())) return;
-        // circle.setRadius(circle.getRadius() + offset);
         width += offset;
         height += offset;
-        if(posCheck(point.getPos())){
-            circle.setRadius(circle.getRadius() + offset);
+        if(posCheck(point.getPos()) && width > 0 && height > 0){
+            circle.setRadius(circle.getRadius() + offset / 2);
         }else{
             width -= offset;
             height -= offset;

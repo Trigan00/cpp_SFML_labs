@@ -19,11 +19,14 @@ public:
     
     void setSize(float offset) override {
         sf::Vector2f s = rectangle.getSize();
-        const sf::Vector2f newSize(point.getPos().x + s.x + offset, point.getPos().y + s.y + offset);
-        if (s.x + offset < 0 || s.y + offset < 0) return;
-        if (newSize.x >= windowX) return;
-        if (newSize.y >= windowY) return;
-        rectangle.setSize(sf::Vector2f(s.x + offset, s.y + offset));
+        width += offset;
+        height += offset;
+        if(posCheck(point.getPos()) && width > 0 && height > 0){
+            rectangle.setSize(sf::Vector2f(s.x + offset, s.y + offset));
+        }else{
+            width -= offset;
+            height -= offset;
+        }
     }
     
     void setPos(const sf::Vector2f& pos) override {

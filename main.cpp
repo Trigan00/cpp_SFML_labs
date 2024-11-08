@@ -58,10 +58,10 @@ int main() {
             menu.handleEvent(window, event);
         }
 
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) circle->move(sf::Vector2f(-3.0f, 0.0f));
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) circle->move(sf::Vector2f(3.0f, 0.0f));
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) circle->move(sf::Vector2f(0.0f, -3.0f));
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) circle->move(sf::Vector2f(0.0f, 3.0f));
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) rectangle->move(sf::Vector2f(-3.0f, 0.0f));
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) rectangle->move(sf::Vector2f(3.0f, 0.0f));
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) rectangle->move(sf::Vector2f(0.0f, -3.0f));
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) rectangle->move(sf::Vector2f(0.0f, 3.0f));
 
         window.clear(sf::Color::Black);
         for (size_t i = 0; i < figuresVector.size(); i++) figuresVector[i]->draw(window);
