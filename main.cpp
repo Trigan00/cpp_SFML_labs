@@ -22,15 +22,14 @@ int main() {
     sf::RenderWindow window(sf::VideoMode(windowX, windowY), "SFML Project");
     window.setFramerateLimit(60);
 
-    Circle* circle = new Circle(50.0f, sf::Vector2f(300.0f, 200.0f),sf::Color::Cyan);
+    Circle* circle = new Circle(50.0f, 50.0f, sf::Vector2f(300.0f, 200.0f),sf::Color::Cyan);
     Rectangle* rectangle = new Rectangle(sf::Vector2f(120.0f, 50.0f), sf::Vector2f(400.0f, 50.0f), sf::Color::Magenta);
     Rectangle* line = new Line(sf::Vector2f(150.0f, 5.0f), sf::Vector2f(100.0f, 30.0f), sf::Color::Yellow);
     Circle* ring = new Ring(50.0f, sf::Vector2f(100.0f, 400.0f),sf::Color::Red);
     Rectangle* squareCircle = new SquareCircle(sf::Vector2f(100.0f, 100.0f), sf::Vector2f(300.0f, 400.0f), sf::Color::Red);
-    Ellipse* ellipse = new Ellipse(50.0f, sf::Vector2f(500.0f, 450.0f),sf::Color::Red);
-    Rhombus* rhombus = new Rhombus(200, 100, sf::Vector2f(150, 250), sf::Color::Red);
-    Trapezoid* trapezoid = new Trapezoid(sf::Vector2f(500, 200), sf::Vector2f(700, 200), 
-                        sf::Vector2f(650, 400), sf::Vector2f(550, 400), sf::Color::Red);
+    Ellipse* ellipse = new Ellipse(100.0f, 50.0f, sf::Vector2f(500.0f, 450.0f),sf::Color::Red);
+    Rhombus* rhombus = new Rhombus(sf::Vector2f(20, 100), 100, 200, sf::Color::Red);
+    Trapezoid* trapezoid = new Trapezoid(sf::Vector2f(450.0f, 250.0f), 100.0f, 130.0f, sf::Color::Red);
 
     std::vector<Figure*> figuresVector {circle, rectangle, line, ring, squareCircle, rhombus, trapezoid, ellipse};
 
@@ -46,7 +45,8 @@ int main() {
     MenuButton rectangleBut4("Set random position", figuresVector, ActionType::RANDOM_POS, Shape::RectangleFigure);
     MenuButton ellipseBut1("Rotate", figuresVector, ActionType::ACTION, Shape::EllipseFigure);
 
-    MenuButton* butArr[11] {&circleBut0, &circleBut1, &rectangleBut1, &lineBut1, &circleBut2, &rectangleBut2, &circleBut3, &rectangleBut3, &circleBut4, &rectangleBut4, &ellipseBut1};
+    MenuButton* butArr[11] {&circleBut0, &circleBut1, &rectangleBut1, &lineBut1, &circleBut2, &rectangleBut2,
+                            &circleBut3, &rectangleBut3, &circleBut4, &rectangleBut4, &ellipseBut1};
 
     Menu menu(butArr, 11);
 
@@ -58,10 +58,10 @@ int main() {
             menu.handleEvent(window, event);
         }
 
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) ellipse->move(sf::Vector2f(-3.0f, 0.0f));
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) ellipse->move(sf::Vector2f(3.0f, 0.0f));
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) ellipse->move(sf::Vector2f(0.0f, -3.0f));
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) ellipse->move(sf::Vector2f(0.0f, 3.0f));
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) circle->move(sf::Vector2f(-3.0f, 0.0f));
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) circle->move(sf::Vector2f(3.0f, 0.0f));
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) circle->move(sf::Vector2f(0.0f, -3.0f));
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) circle->move(sf::Vector2f(0.0f, 3.0f));
 
         window.clear(sf::Color::Black);
         for (size_t i = 0; i < figuresVector.size(); i++) figuresVector[i]->draw(window);

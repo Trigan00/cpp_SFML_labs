@@ -9,9 +9,9 @@
 
 class Circle : public Figure {
 public:
-    Circle(float radius, const sf::Vector2f& localPosition, sf::Color color)
-        : Figure(localPosition) {
-        while(!posCheck(localPosition, radius)){
+    Circle(float radius, float ellipseR, const sf::Vector2f& localPosition, sf::Color color)
+        : Figure(localPosition, radius * 2, ellipseR * 2) {
+        while(!localPosCheck(localPosition, radius)){
             radius -= 1;
         }
         circle.setRadius(radius);
@@ -19,7 +19,7 @@ public:
         circle.setPosition(point.getPos());
     }
 
-    bool posCheck(sf::Vector2f newPos, float r) {
+    bool localPosCheck(sf::Vector2f newPos, float r) {
         if (newPos.x <= 0) return false;
         if (newPos.x + 2 * r >= windowX) return false;
         if (newPos.y <= 0) return false;
@@ -27,19 +27,20 @@ public:
         return true;
     }
 
-    void move(const sf::Vector2f& offset) override {
-        const sf::Vector2f newPos = point.getPos() + offset;
-        if (!posCheck(newPos, circle.getRadius())) return;
-        point.setPos(newPos);
-        circle.setPosition(point.getPos());
-    }
-    
     void setSize(float offset) override {
-        const sf::Vector2f newPos = sf::Vector2f(point.getPos().x + offset, point.getPos().y + offset);
-        const float newRadius = circle.getRadius() + offset;
-        if (newRadius <= 0) return;
-        if (!posCheck(newPos, circle.getRadius())) return;
-        circle.setRadius(circle.getRadius() + offset);
+        // const sf::Vector2f newPos = sf::Vector2f(point.getPos().x + offset, point.getPos().y + offset);
+        // const float newRadius = circle.getRadius() + offset;
+        // if (newRadius <= 0) return;
+        // if (!posCheck(newPos, circle.getRadius())) return;
+        // circle.setRadius(circle.getRadius() + offset);
+        width += offset;
+        height += offset;
+        if(posCheck(point.getPos())){
+            circle.setRadius(circle.getRadius() + offset);
+        }else{
+            width -= offset;
+            height -= offset;
+        }
     }
     
     void setPos(const sf::Vector2f& pos) override {
@@ -51,7 +52,8 @@ public:
 
     void action() override {};
 
-    void draw(sf::RenderWindow& window) const override {
+    void draw(sf::RenderWindow& window) override {
+        circle.setPosition(point.getPos());
         if (getIsActive()) window.draw(circle);
     }
 

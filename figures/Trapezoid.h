@@ -6,11 +6,12 @@
 
 class Trapezoid : public Quadrilateral {
 public:
-    Trapezoid(const sf::Vector2f& topLeft, const sf::Vector2f& topRight, 
-              const sf::Vector2f& bottomRight, const sf::Vector2f& bottomLeft,
-              const sf::Color& color = sf::Color::Yellow)
-    : Quadrilateral(sf::Vector2f(0, 0), color) {
-        setPoints({topLeft, topRight, bottomRight, bottomLeft});
+    Trapezoid(const sf::Vector2f& pos, float width, float height, const sf::Color& color = sf::Color::Yellow)
+    : Quadrilateral(pos, width, height, color) {}
+
+    void draw(sf::RenderWindow& window) override {
+        setPoints({sf::Vector2f(point.getPos().x + width * 0.2, point.getPos().y), sf::Vector2f(point.getPos().x + width * 0.8, point.getPos().y), sf::Vector2f(point.getPos().x + width, point.getPos().y + height), sf::Vector2f(point.getPos().x, point.getPos().y + height)});
+        window.draw(shape);
     }
 };
 

@@ -16,7 +16,9 @@ public:
 
     Shape getShape() const override { return Shape::SquareCircleFigure;}
 
-    void draw(sf::RenderWindow& window) const override {
+    void draw(sf::RenderWindow& window) override {
+        rectangle.setPosition(point.getPos());
+        innerCircle.setPosition(point.getPos());
         if (getIsActive()) {
             window.draw(rectangle);
             window.draw(innerCircle);

@@ -47,7 +47,7 @@ public:
     }
 
     void createCircle(){
-        Circle* circle = new Circle(50.0f, sf::Vector2f(400.0f, 200.0f),sf::Color::Green);
+        Circle* circle = new Circle(50.0f, 50.0f, sf::Vector2f(400.0f, 200.0f),sf::Color::Green);
         circle->setPos(circle->getRandomPos());
         figuresVector.push_back(circle);
     }

@@ -10,7 +10,7 @@
 class Quadrilateral: public Figure {
 public:
 
-    Quadrilateral(const sf::Vector2f& localPosition, const sf::Color& color = sf::Color::White): Figure(localPosition) {
+    Quadrilateral(const sf::Vector2f& localPosition, float w, float h, const sf::Color& color = sf::Color::White): Figure(localPosition, w, h) {
         shape.setFillColor(color);
     }
 
@@ -18,19 +18,13 @@ public:
         shape.setFillColor(color);
     }
 
-    void setSize(float offset) {}
-    void setPos(const sf::Vector2f& pos) {}
-    Shape getShape() const {return Shape::QuadrilateralFigure;}
+    void setSize(float offset) override {}
+    void setPos(const sf::Vector2f& pos) override {}
+    Shape getShape() const override {return Shape::QuadrilateralFigure;}
     void action() {}
 
-    void move(const sf::Vector2f& offset) {
-        point.setPos(point.getPos() + offset);
-        shape.setPosition(point.getPos());
-    }
 
-    void draw(sf::RenderWindow& window) const {
-        window.draw(shape);
-    }
+    virtual void draw(sf::RenderWindow& window) = 0;
 
 protected:
     sf::ConvexShape shape;

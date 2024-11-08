@@ -10,16 +10,12 @@
 class Rectangle : public Figure {
 public:
     Rectangle(const sf::Vector2f& size, const sf::Vector2f& localPosition, sf::Color color)
-        : Figure(localPosition) {
+        : Figure(localPosition, size.x, size.y) {
         rectangle.setSize(size);
         rectangle.setFillColor(color);
         rectangle.setPosition(point.getPos());
     }
 
-    void move(const sf::Vector2f& offset) override {
-        point.setPos(point.getPos() + offset);
-        rectangle.setPosition(point.getPos());
-    }
     
     void setSize(float offset) override {
         sf::Vector2f s = rectangle.getSize();
@@ -40,7 +36,8 @@ public:
     void action() override {};
 
 
-    void draw(sf::RenderWindow& window) const override {
+    void draw(sf::RenderWindow& window) override {
+        rectangle.setPosition(point.getPos());
         if (getIsActive()) window.draw(rectangle);
     }
 
