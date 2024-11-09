@@ -7,7 +7,7 @@
 
 class Ring: public Circle {
 public:
-    Ring(float radius, const sf::Vector2f& localPosition, sf::Color color):Circle(radius, radius, localPosition, color), r(radius), Ir(radius * 0.9) {
+    Ring(float radius, const sf::Vector2f& localPosition, sf::Color color):Circle(radius, localPosition, color), r(radius), Ir(radius * 0.9) {
         innerCircle.setRadius(Ir);
         innerCircle.setFillColor(sf::Color::Black);
         innerCircle.setPosition(

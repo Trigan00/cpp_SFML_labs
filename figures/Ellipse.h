@@ -7,10 +7,11 @@
 
 class Ellipse: public Circle {
 public:
-    Ellipse(float width, float height, const sf::Vector2f& localPosition, sf::Color color):Circle(width, height, localPosition, color) {
+    Ellipse(float width, float height, const sf::Vector2f& localPosition, sf::Color color):Circle(width, height, localPosition) {
         circle.setRadius(1.0f);
         circle.setPointCount(100);
-        circle.setScale(sf::Vector2f(width, height));
+        circle.setScale(sf::Vector2f(width / 2, height / 2));
+        circle.setFillColor(color);
     };
 
     Shape getShape() const override { return Shape::EllipseFigure;}

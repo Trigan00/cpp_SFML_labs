@@ -9,8 +9,8 @@
 
 class Circle : public Figure {
 public:
-    Circle(float radius, float ellipseR, const sf::Vector2f& localPosition, sf::Color color)
-        : Figure(localPosition, radius * 2, ellipseR * 2) {
+    Circle(float radius, const sf::Vector2f& localPosition, sf::Color color)
+        : Figure(localPosition, radius * 2, radius * 2) {
         while(!localPosCheck(localPosition, radius)){
             radius -= 1;
         }
@@ -18,6 +18,8 @@ public:
         circle.setFillColor(color);
         circle.setPosition(point.getPos());
     }
+    Circle(float width, float height, const sf::Vector2f& localPosition)
+        : Figure(localPosition, width, height) {}
 
     bool localPosCheck(sf::Vector2f newPos, float r) {
         if (newPos.x <= 0) return false;

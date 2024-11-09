@@ -6,7 +6,7 @@
 
 class Rhombus : public Quadrilateral {
 public:
-    Rhombus(const sf::Vector2f& pos, float width, float height, const sf::Color& color = sf::Color::Green) 
+    Rhombus(float width, float height, const sf::Vector2f& pos, const sf::Color& color = sf::Color::Green) 
     : Quadrilateral(pos, width, height, color) {}
 
     void draw(sf::RenderWindow& window) override {

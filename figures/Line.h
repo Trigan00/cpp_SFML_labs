@@ -8,7 +8,7 @@
 
 class Line: public Rectangle {
 public:
-    Line(const sf::Vector2f& size, const sf::Vector2f& localPosition, sf::Color color):Rectangle(size, localPosition, color){};
+    Line(float width, float height, const sf::Vector2f& localPosition, sf::Color color):Rectangle(width, height, localPosition, color){};
 
     Shape getShape() const override { return Shape::LineFigure;}
 

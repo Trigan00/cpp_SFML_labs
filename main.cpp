@@ -17,21 +17,51 @@
 #include "figures/FigureShape.h"
 #include "MenuButton.h"
 
+sf::Vector2f getRandomPos(int XMax = 700, int YMax = 500){
+    const float offsetX = 0 + ( std::rand() % ( XMax - 0 + 1 ) ); 
+    const float offsetY = 0 + ( std::rand() % ( YMax - 0 + 1 ) ); 
+    return sf::Vector2f(offsetX, offsetY);
+}
+
+void vectorInit(std::vector<Figure*>* vector){
+    std::srand(static_cast<unsigned>(std::time(0)));
+
+    for (int i = 0; i < 10; i++)
+    {
+        Shape randomShape = static_cast<Shape>(std::rand() % 7);
+        sf::Vector2f randomPos = getRandomPos();
+        switch (randomShape) {
+            case CircleFigure: vector->push_back(new Circle(50.0f, randomPos, sf::Color::Cyan)); break;
+            case RectangleFigure: vector->push_back(new Rectangle(120.0f, 50.0f, randomPos, sf::Color::Magenta)); break;
+            case LineFigure: vector->push_back(new Line(150.0f, 5.0f, randomPos, sf::Color::Yellow)); break;
+            case RingFigure: vector->push_back(new Ring(50.0f, randomPos, sf::Color::Red)); break;
+            case SquareCircleFigure: vector->push_back(new SquareCircle(100.0f, 100.0f, randomPos, sf::Color::Red)); break;
+            case EllipseFigure: vector->push_back(new Ellipse(100.0f, 50.0f, randomPos, sf::Color::Red)); break;
+            case QuadrilateralFigure: vector->push_back(new Rhombus(100, 200, randomPos, sf::Color::Red)); break;
+        }
+    }
+
+}
 
 int main() {
     sf::RenderWindow window(sf::VideoMode(windowX, windowY), "SFML Project");
     window.setFramerateLimit(60);
 
-    Circle* circle = new Circle(50.0f, 50.0f, sf::Vector2f(300.0f, 200.0f),sf::Color::Cyan);
-    Rectangle* rectangle = new Rectangle(sf::Vector2f(120.0f, 50.0f), sf::Vector2f(400.0f, 50.0f), sf::Color::Magenta);
-    Rectangle* line = new Line(sf::Vector2f(150.0f, 5.0f), sf::Vector2f(100.0f, 30.0f), sf::Color::Yellow);
-    Circle* ring = new Ring(50.0f, sf::Vector2f(100.0f, 400.0f),sf::Color::Red);
-    Rectangle* squareCircle = new SquareCircle(sf::Vector2f(100.0f, 100.0f), sf::Vector2f(300.0f, 400.0f), sf::Color::Red);
-    Ellipse* ellipse = new Ellipse(100.0f, 50.0f, sf::Vector2f(500.0f, 450.0f),sf::Color::Red);
-    Rhombus* rhombus = new Rhombus(sf::Vector2f(20, 100), 100, 200, sf::Color::Red);
-    Trapezoid* trapezoid = new Trapezoid(sf::Vector2f(450.0f, 250.0f), 100.0f, 130.0f, sf::Color::Red);
+    // Circle* circle = new Circle(50.0f, 50.0f, sf::Vector2f(300.0f, 200.0f),sf::Color::Cyan);
+    // Rectangle* rectangle = new Rectangle(120.0f, 50.0f, sf::Vector2f(400.0f, 50.0f), sf::Color::Magenta);
+    // Rectangle* line = new Line(150.0f, 5.0f, sf::Vector2f(100.0f, 30.0f), sf::Color::Yellow);
+    // Circle* ring = new Ring(50.0f, sf::Vector2f(100.0f, 400.0f),sf::Color::Red);
+    // Rectangle* squareCircle = new SquareCircle(100.0f, 100.0f, sf::Vector2f(300.0f, 400.0f), sf::Color::Red);
+    // Ellipse* ellipse = new Ellipse(100.0f, 50.0f, sf::Vector2f(500.0f, 450.0f),sf::Color::Red);
+    // Rhombus* rhombus = new Rhombus(100, 200, sf::Vector2f(20, 100), sf::Color::Red);
+    // Trapezoid* trapezoid = new Trapezoid(sf::Vector2f(450.0f, 250.0f), 100.0f, 130.0f, sf::Color::Red);
 
-    std::vector<Figure*> figuresVector {circle, rectangle, line, ring, squareCircle, rhombus, trapezoid, ellipse};
+    // std::vector<Figure*> figuresVector {circle, rectangle, line, ring, squareCircle, rhombus, trapezoid, ellipse};
+    std::vector<Figure*> figuresVector {};
+    vectorInit(&figuresVector);
+
+    
+    
 
     MenuButton circleBut0("Create", figuresVector, ActionType::CREATE_CIRCLE, Shape::CircleFigure);
     MenuButton circleBut1("Show/Hide", figuresVector, ActionType::CHANGE_VISIBILITY, Shape::CircleFigure);
@@ -58,10 +88,10 @@ int main() {
             menu.handleEvent(window, event);
         }
 
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) rectangle->move(sf::Vector2f(-3.0f, 0.0f));
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) rectangle->move(sf::Vector2f(3.0f, 0.0f));
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) rectangle->move(sf::Vector2f(0.0f, -3.0f));
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) rectangle->move(sf::Vector2f(0.0f, 3.0f));
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) figuresVector[0]->move(sf::Vector2f(-3.0f, 0.0f));
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) figuresVector[0]->move(sf::Vector2f(3.0f, 0.0f));
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) figuresVector[0]->move(sf::Vector2f(0.0f, -3.0f));
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) figuresVector[0]->move(sf::Vector2f(0.0f, 3.0f));
 
         window.clear(sf::Color::Black);
         for (size_t i = 0; i < figuresVector.size(); i++) figuresVector[i]->draw(window);

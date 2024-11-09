@@ -7,8 +7,8 @@
 
 class SquareCircle: public Rectangle {
 public:
-    SquareCircle(const sf::Vector2f& size, const sf::Vector2f& localPosition, sf::Color color):Rectangle(size, localPosition, color) {
-        const float innerRadius = size.x / 2;
+    SquareCircle(float width, float height, const sf::Vector2f& localPosition, sf::Color color):Rectangle(width, height, localPosition, color) {
+        const float innerRadius = width / 2;
         innerCircle.setRadius(innerRadius);
         innerCircle.setFillColor(sf::Color::Black);
         innerCircle.setPosition(point.getPos());

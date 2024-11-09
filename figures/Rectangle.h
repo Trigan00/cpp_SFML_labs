@@ -9,9 +9,9 @@
 
 class Rectangle : public Figure {
 public:
-    Rectangle(const sf::Vector2f& size, const sf::Vector2f& localPosition, sf::Color color)
-        : Figure(localPosition, size.x, size.y) {
-        rectangle.setSize(size);
+    Rectangle(float width, float height, const sf::Vector2f& localPosition, sf::Color color)
+        : Figure(localPosition, width, height) {
+        rectangle.setSize(sf::Vector2f(width, height));
         rectangle.setFillColor(color);
         rectangle.setPosition(point.getPos());
     }
