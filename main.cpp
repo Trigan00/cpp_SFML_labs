@@ -17,10 +17,10 @@
 #include "figures/FigureShape.h"
 #include "MenuButton.h"
 
-sf::Vector2f getRandomPos(int XMax = 700, int YMax = 500){
-    const float offsetX = 0 + ( std::rand() % ( XMax - 0 + 1 ) ); 
-    const float offsetY = 0 + ( std::rand() % ( YMax - 0 + 1 ) ); 
-    return sf::Vector2f(offsetX, offsetY);
+sf::Vector2f getRandomPos(int XMax = 600, int YMax = 500){
+    const float x = 0 + ( std::rand() % ( XMax - 0 + 1 ) ); 
+    const float y = 0 + ( std::rand() % ( YMax - 0 + 1 ) ); 
+    return sf::Vector2f(x, y);
 }
 
 void vectorInit(std::vector<Figure*>* vector){
@@ -37,7 +37,7 @@ void vectorInit(std::vector<Figure*>* vector){
             case RingFigure: vector->push_back(new Ring(50.0f, randomPos, sf::Color::Red)); break;
             case SquareCircleFigure: vector->push_back(new SquareCircle(100.0f, 100.0f, randomPos, sf::Color::Red)); break;
             case EllipseFigure: vector->push_back(new Ellipse(100.0f, 50.0f, randomPos, sf::Color::Red)); break;
-            case QuadrilateralFigure: vector->push_back(new Rhombus(100, 200, randomPos, sf::Color::Red)); break;
+            case QuadrilateralFigure: vector->push_back(new Rhombus(100, 100, randomPos, sf::Color::Red)); break;
         }
     }
 
@@ -54,14 +54,11 @@ int main() {
     // Rectangle* squareCircle = new SquareCircle(100.0f, 100.0f, sf::Vector2f(300.0f, 400.0f), sf::Color::Red);
     // Ellipse* ellipse = new Ellipse(100.0f, 50.0f, sf::Vector2f(500.0f, 450.0f),sf::Color::Red);
     // Rhombus* rhombus = new Rhombus(100, 200, sf::Vector2f(20, 100), sf::Color::Red);
-    // Trapezoid* trapezoid = new Trapezoid(sf::Vector2f(450.0f, 250.0f), 100.0f, 130.0f, sf::Color::Red);
+    // Trapezoid* trapezoid = new Trapezoid(100.0f, 130.0f, sf::Vector2f(450.0f, 250.0f), sf::Color::Red);
 
     // std::vector<Figure*> figuresVector {circle, rectangle, line, ring, squareCircle, rhombus, trapezoid, ellipse};
     std::vector<Figure*> figuresVector {};
     vectorInit(&figuresVector);
-
-    
-    
 
     MenuButton circleBut0("Create", figuresVector, ActionType::CREATE_CIRCLE, Shape::CircleFigure);
     MenuButton circleBut1("Show/Hide", figuresVector, ActionType::CHANGE_VISIBILITY, Shape::CircleFigure);
@@ -88,10 +85,10 @@ int main() {
             menu.handleEvent(window, event);
         }
 
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) figuresVector[0]->move(sf::Vector2f(-3.0f, 0.0f));
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) figuresVector[0]->move(sf::Vector2f(3.0f, 0.0f));
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) figuresVector[0]->move(sf::Vector2f(0.0f, -3.0f));
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) figuresVector[0]->move(sf::Vector2f(0.0f, 3.0f));
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) for (size_t i = 0; i < figuresVector.size(); i++) figuresVector[i]->move(sf::Vector2f(-3.0f, 0.0f)); 
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) for (size_t i = 0; i < figuresVector.size(); i++) figuresVector[i]->move(sf::Vector2f(3.0f, 0.0f));
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) for (size_t i = 0; i < figuresVector.size(); i++) figuresVector[i]->move(sf::Vector2f(0.0f, -3.0f));
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) for (size_t i = 0; i < figuresVector.size(); i++) figuresVector[i]->move(sf::Vector2f(0.0f, 3.0f));
 
         window.clear(sf::Color::Black);
         for (size_t i = 0; i < figuresVector.size(); i++) figuresVector[i]->draw(window);
