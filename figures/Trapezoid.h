@@ -11,7 +11,7 @@ public:
 
     void draw(sf::RenderWindow& window) override {
         setPoints({sf::Vector2f(point.getPos().x + width * 0.2, point.getPos().y), sf::Vector2f(point.getPos().x + width * 0.8, point.getPos().y), sf::Vector2f(point.getPos().x + width, point.getPos().y + height), sf::Vector2f(point.getPos().x, point.getPos().y + height)});
-        window.draw(shape);
+        if (getIsActive()) window.draw(shape);
     }
 };
 

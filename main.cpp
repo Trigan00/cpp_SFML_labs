@@ -5,43 +5,10 @@
 
 #include "WindowConsts.h"
 #include "Menu.h"
-#include "figures/Figure.h"
-#include "figures/Circle.h"
-#include "figures/Ring.h"
-#include "figures/Rectangle.h"
-#include "figures/Line.h"
-#include "figures/SquareCircle.h"
-#include "figures/Ellipse.h"
-#include "figures/Rhombus.h"
-#include "figures/Trapezoid.h"
 #include "figures/FigureShape.h"
 #include "MenuButton.h"
+#include "VectorInit.h"
 
-sf::Vector2f getRandomPos(int XMax = 600, int YMax = 500){
-    const float x = 0 + ( std::rand() % ( XMax - 0 + 1 ) ); 
-    const float y = 0 + ( std::rand() % ( YMax - 0 + 1 ) ); 
-    return sf::Vector2f(x, y);
-}
-
-void vectorInit(std::vector<Figure*>* vector){
-    std::srand(static_cast<unsigned>(std::time(0)));
-
-    for (int i = 0; i < 10; i++)
-    {
-        Shape randomShape = static_cast<Shape>(std::rand() % 7);
-        sf::Vector2f randomPos = getRandomPos();
-        switch (randomShape) {
-            case CircleFigure: vector->push_back(new Circle(50.0f, randomPos, sf::Color::Cyan)); break;
-            case RectangleFigure: vector->push_back(new Rectangle(120.0f, 50.0f, randomPos, sf::Color::Magenta)); break;
-            case LineFigure: vector->push_back(new Line(150.0f, 5.0f, randomPos, sf::Color::Yellow)); break;
-            case RingFigure: vector->push_back(new Ring(50.0f, randomPos, sf::Color::Red)); break;
-            case SquareCircleFigure: vector->push_back(new SquareCircle(100.0f, 100.0f, randomPos, sf::Color::Red)); break;
-            case EllipseFigure: vector->push_back(new Ellipse(100.0f, 50.0f, randomPos, sf::Color::Red)); break;
-            case QuadrilateralFigure: vector->push_back(new Rhombus(100, 100, randomPos, sf::Color::Red)); break;
-        }
-    }
-
-}
 
 int main() {
     sf::RenderWindow window(sf::VideoMode(windowX, windowY), "SFML Project");
@@ -72,10 +39,19 @@ int main() {
     MenuButton rectangleBut4("Set random position", figuresVector, ActionType::RANDOM_POS, Shape::RectangleFigure);
     MenuButton ellipseBut1("Rotate", figuresVector, ActionType::ACTION, Shape::EllipseFigure);
 
-    MenuButton* butArr[11] {&circleBut0, &circleBut1, &rectangleBut1, &lineBut1, &circleBut2, &rectangleBut2,
-                            &circleBut3, &rectangleBut3, &circleBut4, &rectangleBut4, &ellipseBut1};
+    MenuButton allBut0("Show/Hide", figuresVector, ActionType::CHANGE_VISIBILITY, Shape::All);
+    MenuButton allBut1("Fill vector", figuresVector, ActionType::FILL_VECTOR, Shape::All);
+    MenuButton allBut2("Clear vector", figuresVector, ActionType::CLEAR_VECTOR, Shape::All);
+    MenuButton allBut3("Move circles up", figuresVector, ActionType::MOVE_CIRCLES_UP, Shape::All);
+    MenuButton allBut4("Move circles down", figuresVector, ActionType::MOVE_CIRCLES_DOWN, Shape::All);
+    MenuButton allBut5("Move circles right", figuresVector, ActionType::MOVE_CIRCLES_RIGHT, Shape::All);
+    MenuButton allBut6("Move circles left", figuresVector, ActionType::MOVE_CIRCLES_LEFT, Shape::All);
 
-    Menu menu(butArr, 11);
+
+    MenuButton* butArr[18] {&circleBut0, &circleBut1, &rectangleBut1, &lineBut1, &circleBut2, &rectangleBut2,
+                            &circleBut3, &rectangleBut3, &circleBut4, &rectangleBut4, &ellipseBut1, &allBut0, &allBut1, &allBut2, &allBut3, &allBut4, &allBut5, &allBut6};
+
+    Menu menu(butArr, 18);
 
 
     while (window.isOpen()) {
@@ -89,6 +65,11 @@ int main() {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) for (size_t i = 0; i < figuresVector.size(); i++) figuresVector[i]->move(sf::Vector2f(3.0f, 0.0f));
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) for (size_t i = 0; i < figuresVector.size(); i++) figuresVector[i]->move(sf::Vector2f(0.0f, -3.0f));
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) for (size_t i = 0; i < figuresVector.size(); i++) figuresVector[i]->move(sf::Vector2f(0.0f, 3.0f));
+        
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) figuresVector[0]->move(sf::Vector2f(-3.0f, 0.0f)); 
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) figuresVector[0]->move(sf::Vector2f(3.0f, 0.0f));
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) figuresVector[0]->move(sf::Vector2f(0.0f, -3.0f));
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) figuresVector[0]->move(sf::Vector2f(0.0f, 3.0f));
 
         window.clear(sf::Color::Black);
         for (size_t i = 0; i < figuresVector.size(); i++) figuresVector[i]->draw(window);

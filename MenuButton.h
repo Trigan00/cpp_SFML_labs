@@ -7,8 +7,10 @@
 #include "figures/Circle.h"
 #include "figures/Figure.h"
 #include "figures/FigureShape.h"
+#include "VectorInit.h"
 
-enum ActionType { CREATE_CIRCLE, CHANGE_VISIBILITY, INCREASE_SIZE, DECREASE_SIZE, RANDOM_POS, ACTION};
+
+enum ActionType { CREATE_CIRCLE, CHANGE_VISIBILITY, INCREASE_SIZE, DECREASE_SIZE, RANDOM_POS, ACTION, CLEAR_VECTOR, FILL_VECTOR, MOVE_CIRCLES_RIGHT, MOVE_CIRCLES_LEFT, MOVE_CIRCLES_UP, MOVE_CIRCLES_DOWN};
 
 class MenuButton
 {
@@ -53,14 +55,22 @@ public:
     }
 
     void changeVisibility() {
-        for (size_t i = 0; i < figuresVector.size(); i++)
-        {
-            if (figuresVector[i]->getShape() == shape)
+        if(shape == All) {
+            for (size_t i = 0; i < figuresVector.size(); i++)
             {
                 figuresVector[i]->setIsActive(!figuresVector[i]->getIsActive());
+            }
+        }else{
+            for (size_t i = 0; i < figuresVector.size(); i++)
+            {
+                if (figuresVector[i]->getShape() == shape)
+                {
+                    figuresVector[i]->setIsActive(!figuresVector[i]->getIsActive());
 
+                }
             }
         }
+
     }
 
     void changeSize(float offset) {
@@ -96,29 +106,42 @@ public:
         }
     }
 
+    void clearVector(){
+        for (Figure* fig : figuresVector) {
+            delete fig;
+        }
+        figuresVector.clear();
+    }
+
+    void fillVector(){
+        clearVector();
+        vectorInit(&figuresVector);
+    }
+
+    void moveCircles(sf::Vector2f dir){
+        for (Figure* fig : figuresVector) {
+            if (Circle* circle = dynamic_cast<Circle*>(fig)) {
+                circle->move(dir);
+            }
+        }
+    }
+
     void onClick(){
         switch (action)
         {
-        case CREATE_CIRCLE:
-            createCircle();
-            break;
-        case CHANGE_VISIBILITY:
-            changeVisibility();
-            break;
-        case INCREASE_SIZE:
-            changeSize(5.0f);
-            break;
-        case DECREASE_SIZE:
-            changeSize(-5.0f);
-            break;
-        case RANDOM_POS:
-            setRandomPos();
-            break;
-        case ACTION:
-            doAction();
-            break;
-        default:
-            break;
+        case CREATE_CIRCLE: createCircle(); break;
+        case CHANGE_VISIBILITY: changeVisibility(); break;
+        case INCREASE_SIZE: changeSize(5.0f); break;
+        case DECREASE_SIZE: changeSize(-5.0f); break;
+        case RANDOM_POS: setRandomPos(); break;
+        case ACTION: doAction(); break;
+        case CLEAR_VECTOR: clearVector(); break;
+        case FILL_VECTOR: fillVector(); break;
+        case MOVE_CIRCLES_RIGHT: moveCircles(sf::Vector2f(5.0f, 0.0f)); break;
+        case MOVE_CIRCLES_LEFT: moveCircles(sf::Vector2f(-5.0f, 0.0f)); break;
+        case MOVE_CIRCLES_UP: moveCircles(sf::Vector2f(0.0f, -5.0f)); break;
+        case MOVE_CIRCLES_DOWN: moveCircles(sf::Vector2f(0.0f, 5.0f)); break;
+        default: break;
         }
     }
 

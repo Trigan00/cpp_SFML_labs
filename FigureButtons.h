@@ -28,6 +28,7 @@ public:
         figureButtonsVector.push_back(FigureButton(Shape::RectangleFigure));
         figureButtonsVector.push_back(FigureButton(Shape::LineFigure));
         figureButtonsVector.push_back(FigureButton(Shape::EllipseFigure));
+        figureButtonsVector.push_back(FigureButton(Shape::All));
         for (int i = 0; i < figureButtonsVector.size(); ++i) {
             figureButtonsVector[i].button.setPosition(140, 160 + i * 70);
         }

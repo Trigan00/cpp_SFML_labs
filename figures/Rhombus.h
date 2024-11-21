@@ -16,7 +16,7 @@ public:
         sf::Vector2f point4(point.getPos().x, point.getPos().y + height * 0.5);
         
         setPoints({point1, point2, point3, point4});
-        window.draw(shape);
+        if (getIsActive()) window.draw(shape);
     }
 };
 

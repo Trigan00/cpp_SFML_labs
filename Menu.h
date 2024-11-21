@@ -15,10 +15,10 @@ public:
         openMenuButton.setFillColor(sf::Color::Blue);
 
         menuBackground.setSize(sf::Vector2f(400, 400));
-        menuBackground.setPosition(200, 150);
+        menuBackground.setPosition(200, 100);
         menuBackground.setFillColor(sf::Color(0, 0, 100, 200));
   
-        figuresMenuBackground.setSize(sf::Vector2f(70, 280));
+        figuresMenuBackground.setSize(sf::Vector2f(70, 350));
         figuresMenuBackground.setPosition(130, 150);
         figuresMenuBackground.setFillColor(sf::Color(0, 100, 0, 200));
 
@@ -56,8 +56,8 @@ public:
             {
                 MenuButton* but = buttonsArray[i];
                 if (but->getShape() == figureButtons.activeFigure){
-                    but->background.setPosition(210, 160 + j * 70);
-                    but->setTextPos(210, 160 + j * 70);
+                    but->background.setPosition(210, 110 + j * 70);
+                    but->setTextPos(210, 110 + j * 70);
                     but->draw(window);
                     j++;
                 }
