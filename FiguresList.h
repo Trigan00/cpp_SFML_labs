@@ -68,6 +68,14 @@ public:
 
     ~FiguresList() {clear();}
 
+    void moveByKey(sf::Vector2f dir){
+        Node* temp = head;
+        while (temp) {
+            temp->figure->move(dir);
+            temp = temp->next;
+        }
+    }
+
     void draw(sf::RenderWindow& window){
         Node* temp = head;
         while (temp) {

@@ -53,10 +53,10 @@ int main() {
             menu.handleEvent(window, event);
         }
 
-        // if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) for (size_t i = 0; i < figuresVector.size(); i++) figuresVector[i]->move(sf::Vector2f(-3.0f, 0.0f)); 
-        // if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) for (size_t i = 0; i < figuresVector.size(); i++) figuresVector[i]->move(sf::Vector2f(3.0f, 0.0f));
-        // if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) for (size_t i = 0; i < figuresVector.size(); i++) figuresVector[i]->move(sf::Vector2f(0.0f, -3.0f));
-        // if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) for (size_t i = 0; i < figuresVector.size(); i++) figuresVector[i]->move(sf::Vector2f(0.0f, 3.0f));
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) list.moveByKey(sf::Vector2f(-3.0f, 0.0f)); 
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) list.moveByKey(sf::Vector2f(3.0f, 0.0f));
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) list.moveByKey(sf::Vector2f(0.0f, -3.0f));
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) list.moveByKey(sf::Vector2f(0.0f, 3.0f));
         
         // if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) figuresVector[0]->move(sf::Vector2f(-3.0f, 0.0f)); 
         // if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) figuresVector[0]->move(sf::Vector2f(3.0f, 0.0f));
